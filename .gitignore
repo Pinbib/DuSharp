@@ -1,0 +1,12 @@
+/.vscode
+/bin
+/obj
+/test
+/src
+*.user
+*.suo
+*.cache
+*.dll
+*.pdb
+*.nupkg
+/packages/
