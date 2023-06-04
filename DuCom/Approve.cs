@@ -26,7 +26,7 @@ namespace DuCom
             }
             else
             {
-                string[] var = File.ReadAllText(Path.Join("./variable", name + "var")).Split(" ");
+                string[] var = File.ReadAllText(Path.Join("./variable", name + ".var")).Split(" ");
 
                 if (var[0] == type)
                 {

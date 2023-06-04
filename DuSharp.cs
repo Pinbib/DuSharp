@@ -20,7 +20,56 @@ namespace DuSharp
             WriteLine(msg);
             Console.ResetColor();
         }
-        static void Main(string[] arg)
+        public static void DuS(string file, string src)
+        {
+            string[] lines = file.Split(";");
+
+            for (var i = 0; i < lines.Length; i++)
+            {
+                string[] line = lines[i].Trim().Split(" ");
+                /*
+                .
+                .
+                Registration of commands
+                .
+                .
+                */
+                switch (line[0])
+                {
+                    case " ":
+                        break;
+                    case "":
+                        break;
+                    case "approve":
+                        new _approve(line, i + 1, src);
+                        break;
+                    case "printl":
+                        new _printl(line, i + 1, src);
+                        break;
+                    case "call":
+                        new _call(line, i + 1, src);
+                        break;
+                    case "if":
+                        new _if(line, i + 1, src);
+                        break;
+                    default:
+                        if (Regex.IsMatch(string.Join(" ", line), @"^\/\/"))
+                        {
+
+                        }
+                        else
+                        {
+                            ELog("Error: " + "Work: " + src + ": Line: " + (i + 1) + ": Unknown command \"" + line[0] + "\".");
+                        }
+                        break;
+                }
+            }
+        }
+        public void Dum(string file, string src)
+        {
+            DuS(file, src);
+        }
+        public static void Main(string[] arg)
         {
             /*
             .
@@ -78,29 +127,7 @@ namespace DuSharp
                     {
                         string file = File.ReadAllText(src);
 
-                        string[] lines = file.Split(";");
-
-                        for (var i = 0; i < lines.Length; i++)
-                        {
-                            string[] line = lines[i].Trim().Split(" ");
-
-                            switch (line[0])
-                            {
-                                case " ":
-                                    break;
-                                case "":
-                                    break;
-                                case "approve":
-                                    new _approve(line, i + 1, src);
-                                    break;
-                                case "printl":
-                                    new _printl(line, i + 1, src);
-                                    break;
-                                default:
-                                    ELog("Error: " + "Work: " + src + ": Line: " + (i + 1) + ": Unknown command \"" + line[0] + "\".");
-                                    break;
-                            }
-                        }
+                        DuS(file, src);
                     }
                     else
                     {
