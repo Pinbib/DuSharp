@@ -52,6 +52,9 @@ namespace DuSharp
                     case "if":
                         new _if(line, i + 1, src);
                         break;
+                    case "while":
+                        new _while(line, i + 1, src);
+                        break;
                     default:
                         if (Regex.IsMatch(string.Join(" ", line), @"^\/\/"))
                         {
