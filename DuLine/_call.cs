@@ -93,7 +93,7 @@ namespace DuLine
                 }
                 else if (callType == "function")
                 {
-
+                    Declare.call(line[2], src);
                 }
                 else
                 {

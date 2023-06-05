@@ -20,21 +20,21 @@ namespace DuCom
         }
         public static void set(string name, string type, object value)
         {
-            if (!File.Exists(Path.Join("./variable", name + ".var")))
+            if (!File.Exists(Path.Combine("./variable", name + ".var")))
             {
-                File.WriteAllText(Path.Join("./variable", name + ".var"), type + " " + value.ToString());
+                File.WriteAllText(Path.Combine("./variable", name + ".var"), type + " " + value.ToString());
             }
             else
             {
-                string[] var = File.ReadAllText(Path.Join("./variable", name + ".var")).Split(" ");
+                string[] var = File.ReadAllText(Path.Combine("./variable", name + ".var")).Split(" ");
 
                 if (var[0] == type)
                 {
-                    File.WriteAllText(Path.Join("./variable", name + ".var"), type + " " + value.ToString());
+                    File.WriteAllText(Path.Combine("./variable", name + ".var"), type + " " + value.ToString());
                 }
                 else if (var[0] == "undefined")
                 {
-                    File.WriteAllText(Path.Join("./variable", name + ".var"), type + " " + value.ToString());
+                    File.WriteAllText(Path.Combine("./variable", name + ".var"), type + " " + value.ToString());
                 }
                 else
                 {
@@ -45,9 +45,9 @@ namespace DuCom
         public static DV get(string name)
         {
             DV var = new DV();
-            if (File.Exists(Path.Join("./variable", name + ".var")))
+            if (File.Exists(Path.Combine("./variable", name + ".var")))
             {
-                string[] file = File.ReadAllText(Path.Join("./variable", name + ".var")).Split(" ");
+                string[] file = File.ReadAllText(Path.Combine("./variable", name + ".var")).Split(" ");
 
                 var.Type = file[0];
                 var.Data = string.Join(" ", file.Skip(1).ToArray());
@@ -57,6 +57,17 @@ namespace DuCom
                 ILog("Info: " + "Command: " + "Approve: " + "Variable \"" + name + "\" does not exist.");
             }
             return var;
+        }
+        public static void del(string name)
+        {
+            if (File.Exists(Path.Combine("./variable", name + ".var")))
+            {
+                File.Delete(Path.Combine("./variable", name + ".var"));
+            }
+            else
+            {
+                ILog("Info: " + "Command: " + "Approve: " + "Variable \"" + name + "\" does not exist.");
+            }
         }
     }
 }

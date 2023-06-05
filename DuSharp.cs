@@ -55,6 +55,12 @@ namespace DuSharp
                     case "while":
                         new _while(line, i + 1, src);
                         break;
+                    case "declare":
+                        new _declare(line, i + 1, src);
+                        break;
+                    case "delete":
+                        new _delete(line, i + 1, src);
+                        break;
                     default:
                         if (Regex.IsMatch(string.Join(" ", line), @"^\/\/"))
                         {
@@ -124,6 +130,10 @@ namespace DuSharp
                 {
                     Directory.CreateDirectory("./variable");
                 }
+                if (!Path.Exists("./declare"))
+                {
+                    Directory.CreateDirectory("./declare");
+                }
                 if (Path.GetExtension(src) != "")
                 {
                     if (Path.GetExtension(src) == ".du")
@@ -150,6 +160,10 @@ namespace DuSharp
                 if (Path.Exists("./variable"))
                 {
                     Directory.Delete("./variable", true);
+                }
+                if (Path.Exists("./declare"))
+                {
+                    Directory.Delete("./declare", true);
                 }
             }
             else
